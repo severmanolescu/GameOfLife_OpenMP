@@ -1,0 +1,14 @@
+﻿  GameOfLife.c
+  OpenMP_Solution_1D.c
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_1D.c(14,29): warning C4013: 'countNeighbors' undefined; assuming extern returning int
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_1D.c(45,5): warning C4013: 'setRandomGridState' undefined; assuming extern returning int
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_1D.c(49,5): warning C4013: 'printf' undefined; assuming extern returning int
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_1D.c(72,9): warning C4013: 'printGrid' undefined; assuming extern returning int
+  OpenMP_Solution_2D.c
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_2D.c(17,29): warning C4013: 'countNeighbors' undefined; assuming extern returning int
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_2D.c(5,6): warning C4101: 'i': unreferenced local variable
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_2D.c(63,5): warning C4013: 'setRandomGridState' undefined; assuming extern returning int
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_2D.c(67,5): warning C4013: 'printf' undefined; assuming extern returning int
+C:\Facultate\GameOfLife\GameOfLife\OpenMP_Solution_2D.c(90,9): warning C4013: 'printGrid' undefined; assuming extern returning int
+  Generating Code...
+  GameOfLife.vcxproj -> C:\Facultate\GameOfLife\x64\Debug\GameOfLife.exe
