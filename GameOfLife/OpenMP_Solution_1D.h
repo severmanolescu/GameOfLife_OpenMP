@@ -4,6 +4,6 @@
 #include "GameOfLifeConfig.h"
 
 void updateGrid1D(int grid[ROWS][COLS]);
-double startOpenMP1D();
+double startOpenMP1DD(int grid[ROWS][COLS]);
 
 #endif

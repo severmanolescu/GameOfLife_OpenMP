@@ -1,0 +1,90 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6993",
+          "message": {
+            "text": "Code analysis ignores OpenMP constructs; analyzing single-threaded code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Facultate/GameOfLife_OpenMP/GameOfLife/OpenMP_Solution_1D.c"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '40032' bytes of stack.  Consider moving some data to heap."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/Facultate/GameOfLife_OpenMP/GameOfLife/OpenMP_Solution_1D.c"
+                },
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 8
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "startOpenMP1DD",
+                  "decoratedName": "startOpenMP1DD",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.38.33133.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/Facultate/GameOfLife_OpenMP/GameOfLife/OpenMP_Solution_1D.c"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "cac0bd96aaf086609719a74dd0926e035ef28d172b3ee52e9e7b83b0c14a2e4e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/facultate/gameoflife_openmp/gameoflife/gameoflifeconfig.h"
+          },
+          "hashes": {
+            "sha-256": "66202ed1a129f2f91502d8c51b49e89e7bc38408dfe68b619d4416fe261643ea"
+          }
+        }
+      ]
+    }
+  ]
+}

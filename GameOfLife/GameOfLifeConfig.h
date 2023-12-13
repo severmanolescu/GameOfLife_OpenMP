@@ -4,7 +4,7 @@
 // Grid details
 #define ROWS 100
 #define COLS 100
-#define CYCLES 200000
+#define CYCLES 100000
 
 // Cell details
 #define ALIVE '*'
@@ -17,7 +17,7 @@
 #define IS_ALIVE(cell) ((cell) == 1)
 #define IS_DEAD(cell)  ((cell) == 0)
 
-#define PRINT 0
+#define PRINT 1
 #define PRINT_CYCLE 1
 
-#endif // GAME_OF_LIFE_CONFIG_H
+#endif

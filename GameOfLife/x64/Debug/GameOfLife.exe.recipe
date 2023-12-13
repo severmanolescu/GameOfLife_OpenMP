@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Facultate\GameOfLife\x64\Debug\GameOfLife.exe</FullPath>
+      <FullPath>D:\Facultate\GameOfLife_OpenMP\x64\Debug\GameOfLife.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

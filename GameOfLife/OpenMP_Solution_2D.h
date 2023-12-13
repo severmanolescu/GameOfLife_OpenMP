@@ -4,6 +4,6 @@
 #include "GameOfLifeConfig.h"
 
 void updateGrid2D(int grid[ROWS][COLS]);
-double startOpenMP2D();
+double startOpenMP2D(int grid[ROWS][COLS]);
 
-#endif // OPENMP_SOLUTION_2D_H
+#endif

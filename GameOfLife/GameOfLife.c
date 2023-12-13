@@ -7,9 +7,10 @@
 #include "OpenMP_Solution_2D.h"
 #include "GameOfLifeConfig.h"
 
-
 void printGrid(int grid[ROWS][COLS])
 {
+    printf("\n");
+
     for (int i = 0; i < ROWS; i++)
     {
         for (int j = 0; j < COLS; j++)
@@ -17,6 +18,17 @@ void printGrid(int grid[ROWS][COLS])
             printf("%c", IS_ALIVE(grid[i][j]) ? ALIVE : DEAD);
         }
         printf("\n");
+    }
+}
+
+void copyGrid(int toGrid[ROWS][COLS],int fromGrid[ROWS][COLS])
+{
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            toGrid[i][j] = fromGrid[i][j];
+        }
     }
 }
 
@@ -84,15 +96,15 @@ void updateGrid(int grid[ROWS][COLS])
     }
 }
 
-double startGameOfLife()
+double startGameOfLife(int grid[ROWS][COLS])
 {
     double start_time;
     double end_time;
 
     int index = 0;
-    int grid[ROWS][COLS] = { 0 };
 
-    setRandomGridState(grid);
+    int copiedGrid[ROWS][COLS];
+    memcpy(copiedGrid, grid, sizeof(int) * ROWS * COLS);
 
     printf("Start Game of Life...");
 
@@ -112,14 +124,14 @@ double startGameOfLife()
             printf("\rCycle: %d", index);
         }
 
-        updateGrid(grid);
+        updateGrid(copiedGrid);
     }
 
     end_time = omp_get_wtime();
-    
+
     if (PRINT)
     {
-        printGrid(grid);    
+        printGrid(copiedGrid);
     }
 
     printf("\nExecution time: %f seconds\n", end_time - start_time);
@@ -129,14 +141,18 @@ double startGameOfLife()
 
 int main()
 {
-    double gameOfLifeTime = startGameOfLife();
+    int grid[ROWS][COLS] = { 0 };
 
-    double gameOfLifeTime1D = startOpenMP1D();
+    setRandomGridState(grid);
 
-    double gameOfLifeTime2D = startOpenMP2D();
+    double gameOfLifeTime = startGameOfLife(grid);
 
-    printf("\nOpenMP 1D was: %.2f%%", ((gameOfLifeTime - gameOfLifeTime1D) / gameOfLifeTime) * 100);
-    printf("\nOpenMP 2D was: %.2f%%\n", ((gameOfLifeTime - gameOfLifeTime2D) / gameOfLifeTime) * 100);
+    double gameOfLifeTime1D = startOpenMP1DD(grid);
+
+    double gameOfLifeTime2D = startOpenMP2D(grid);
+
+    printf("\nOpenMP 1D was: %.2f%% faster", ((gameOfLifeTime - gameOfLifeTime1D) / gameOfLifeTime) * 100);
+    printf("\nOpenMP 2D was: %.2f%% faster\n", ((gameOfLifeTime - gameOfLifeTime2D) / gameOfLifeTime) * 100);
 
     return 0;
 }

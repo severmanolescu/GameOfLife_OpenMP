@@ -1,48 +1,56 @@
 #include "GameOfLifeConfig.h"
 #include <omp.h>
 
-void updateGrid1D(int grid[ROWS][COLS])
+int cycleGrid[ROWS][COLS];
+
+void updateSubgrid1D(int grid[ROWS][COLS], int row)
 {
-    int newGrid[ROWS][COLS] = { 0 };
-    int i, j;
+    int newGrid[COLS] = { 0 };
 
-#pragma omp parallel for private(j)
-    for (i = 0; i < ROWS; i++)
+    int i;
+
+#pragma omp parallel for private(i)
+    for (i = 0; i < COLS; i++)
     {
-        for (j = 0; j < COLS; j++)
-        {
-            int neighbors = countNeighbors(grid, i, j);
+        int neighbors = countNeighbors(grid, row, i);
 
-            if (IS_ALIVE(grid[i][j]))
-            {
-                newGrid[i][j] = (neighbors < 2 || neighbors > 3) ? 0 : 1;
-            }
-            else
-            {
-                newGrid[i][j] = (neighbors == 3) ? 1 : 0;
-            }
+        if (IS_ALIVE(grid[row][i]))
+        {
+            newGrid[i] = (neighbors < 2 || neighbors > 3) ? 0 : 1;
+        }
+        else
+        {
+            newGrid[i] = (neighbors == 3) ? 1 : 0;
         }
     }
 
-#pragma omp parallel for private(j)
-    for (i = 0; i < ROWS; i++)
+#pragma omp parallel for private(i)
+    for (i = 0; i < COLS; i++)
     {
-        for (j = 0; j < COLS; j++)
-        {
-            grid[i][j] = newGrid[i][j];
-        }
+        cycleGrid[row][i] = newGrid[i];
     }
 }
 
-double startOpenMP1D()
+void updateGrid1D(int grid[ROWS][COLS])
 {
+#pragma omp parallel
+    {
+        int threadID = omp_get_thread_num();
+
+        updateSubgrid1D(grid, threadID);
+    }
+}
+
+double startOpenMP1DD(int grid[ROWS][COLS])
+{
+    int index = 0;
+    int indexRows = 0;
+
     double start_time;
     double end_time;
 
-    int index = 0;
-    int grid[ROWS][COLS] = { 0 };
-
-    setRandomGridState(grid);
+    int testGrid[ROWS][COLS];
+    memcpy(testGrid, grid, sizeof(int) * ROWS * COLS);
 
     omp_set_num_threads(ROWS);
 
@@ -55,21 +63,23 @@ double startOpenMP1D()
 
     start_time = omp_get_wtime();
 
-    for (index = 0; index <= CYCLES; index++)
+    for (index = 0; index < CYCLES; index++)
     {
         if (PRINT_CYCLE)
         {
-            printf("\rCycle: %d", index);
+            printf("\rCycle: %d", index + 1);
         }
 
-        updateGrid1D(grid);
+        updateGrid1D(testGrid);
+
+        copyGrid(testGrid, cycleGrid);
     }
 
     end_time = omp_get_wtime();
 
     if (PRINT)
     {
-        printGrid(grid);
+        printGrid(testGrid);
     }
 
     printf("\nExecution time: %f seconds\n", end_time - start_time);

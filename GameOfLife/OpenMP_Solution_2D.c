@@ -2,6 +2,8 @@
 #include "OpenMP_Solution_2D.h"
 #include <omp.h>
 
+int cycleGrid[ROWS][COLS];
+
 void updateSubgrid2D(int grid[ROWS][COLS], int startRow, int endRow)
 {
     int newGrid[ROWS][COLS] = { 0 };
@@ -32,7 +34,7 @@ void updateSubgrid2D(int grid[ROWS][COLS], int startRow, int endRow)
     {
         for (j = 0; j < COLS; j++)
         {
-            grid[i][j] = newGrid[i][j];
+            cycleGrid[i][j] = newGrid[i][j];
         }
     }
 }
@@ -51,16 +53,17 @@ void updateGrid2D(int grid[ROWS][COLS])
     }
 }
 
-double startOpenMP2D()
+double startOpenMP2D(int grid[ROWS][COLS])
 {
     int index = 0;
 
     double start_time;
     double end_time;
 
-    int grid[ROWS][COLS] = { 0 };
+    int testGrid[ROWS][COLS];
+    memcpy(testGrid, grid, sizeof(int) * ROWS * COLS);
 
-    setRandomGridState(grid);
+    printf("Start Game of Life...");
 
     omp_set_num_threads(4);
 
@@ -80,14 +83,16 @@ double startOpenMP2D()
             printf("\rCycle: %d", index);
         }
 
-        updateGrid2D(grid);
+        updateGrid2D(testGrid);
+
+        copyGrid(testGrid, cycleGrid);
     }
 
     end_time = omp_get_wtime();
 
     if (PRINT)
     {
-        printGrid(grid);
+        printGrid(testGrid);
     }
 
     printf("\nExecution time: %f seconds\n", end_time - start_time);
