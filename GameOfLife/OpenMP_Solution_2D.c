@@ -2,12 +2,8 @@
 #include "OpenMP_Solution_2D.h"
 #include <omp.h>
 
-int cycleGrid[ROWS][COLS];
-
 void updateSubgrid2D(int grid[ROWS][COLS], int startRow, int endRow)
 {
-    int newGrid[ROWS][COLS] = { 0 };
-
     int i;
     int j;
 
@@ -20,21 +16,26 @@ void updateSubgrid2D(int grid[ROWS][COLS], int startRow, int endRow)
 
             if (IS_ALIVE(grid[i][j]))
             {
-                newGrid[i][j] = (neighbors < 2 || neighbors > 3) ? 0 : 1;
+                if (neighbors == 2 || neighbors == 3)
+                {
+                    grid[i][j] = ALIVE;
+                }
+                else
+                {
+                    grid[i][j] = ALIVEDEAD;
+                }
             }
             else
             {
-                newGrid[i][j] = (neighbors == 3) ? 1 : 0;
+                if (neighbors == 3)
+                {
+                    grid[i][j] = DEADALIVE;
+                }
+                else
+                {
+                    grid[i][j] = DEAD;
+                }
             }
-        }
-    }
-
-#pragma omp parallel for private(i, j)
-    for (i = startRow; i < endRow; i++)
-    {
-        for (j = 0; j < COLS; j++)
-        {
-            cycleGrid[i][j] = newGrid[i][j];
         }
     }
 }
@@ -85,7 +86,7 @@ double startOpenMP2D(int grid[ROWS][COLS])
 
         updateGrid2D(testGrid);
 
-        copyGrid(testGrid, cycleGrid);
+        applyTheChanges(testGrid);
     }
 
     end_time = omp_get_wtime();

@@ -1,27 +1,11 @@
 ﻿  GameOfLife.c
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\GameOfLife.c(107,5): warning C4013: 'memcpy' undefined; assuming extern returning int
+D:\Facultate\GameOfLife_OpenMP\GameOfLife\GameOfLife.c(130,5): warning C4013: 'memcpy' undefined; assuming extern returning int
   OpenMP_Solution_1D.c
 D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(15,25): warning C4013: 'countNeighbors' undefined; assuming extern returning int
 D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(6,6): warning C4101: 'i': unreferenced local variable
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(53,5): warning C4013: 'memcpy' undefined; assuming extern returning int
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(57,5): warning C4013: 'printf' undefined; assuming extern returning int
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(75,9): warning C4013: 'copyGrid' undefined; assuming extern returning int
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(82,9): warning C4013: 'printGrid' undefined; assuming extern returning int
-  OpenMP_Solution_2D.c
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(19,29): warning C4013: 'countNeighbors' undefined; assuming extern returning int
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(7,6): warning C4101: 'i': unreferenced local variable
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(64,5): warning C4013: 'memcpy' undefined; assuming extern returning int
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(66,5): warning C4013: 'printf' undefined; assuming extern returning int
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(88,9): warning C4013: 'copyGrid' undefined; assuming extern returning int
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(95,9): warning C4013: 'printGrid' undefined; assuming extern returning int
-  Running Code Analysis for C/C++...
+D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(61,5): warning C4013: 'memcpy' undefined; assuming extern returning int
+D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(65,5): warning C4013: 'printf' undefined; assuming extern returning int
+D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(83,9): warning C4013: 'applyTheChanges' undefined; assuming extern returning int
+D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(90,9): warning C4013: 'printGrid' undefined; assuming extern returning int
   Generating Code...
   GameOfLife.vcxproj -> D:\Facultate\GameOfLife_OpenMP\x64\Debug\GameOfLife.exe
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\GameOfLife.c(69): warning C6262: Function uses '40028' bytes of stack.  Consider moving some data to heap.
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\GameOfLife.c(99): warning C6262: Function uses '40028' bytes of stack.  Consider moving some data to heap.
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\GameOfLife.c(142): warning C6262: Function uses '40024' bytes of stack.  Consider moving some data to heap.
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(12): warning C6993: Code analysis ignores OpenMP constructs; analyzing single-threaded code.
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_1D.c(44): warning C6262: Function uses '40032' bytes of stack.  Consider moving some data to heap.
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(14): warning C6993: Code analysis ignores OpenMP constructs; analyzing single-threaded code.
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(7): warning C6262: Function uses '40028' bytes of stack.  Consider moving some data to heap.
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\OpenMP_Solution_2D.c(56): warning C6262: Function uses '40028' bytes of stack.  Consider moving some data to heap.

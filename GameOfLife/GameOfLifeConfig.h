@@ -6,9 +6,16 @@
 #define COLS 100
 #define CYCLES 100000
 
+// Cell print
+#define ALIVE_PRINT '*'
+#define DEAD_PRINT '-'
+
 // Cell details
-#define ALIVE '*'
-#define DEAD '-'
+#define ALIVE 1
+#define ALIVEDEAD -2
+
+#define DEAD 0
+#define DEADALIVE -1
 
 // Console clearing macro for Windows
 #define CLEAR_CONSOLE() system("cls")

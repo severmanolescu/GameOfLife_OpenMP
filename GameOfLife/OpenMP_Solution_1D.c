@@ -16,18 +16,26 @@ void updateSubgrid1D(int grid[ROWS][COLS], int row)
 
         if (IS_ALIVE(grid[row][i]))
         {
-            newGrid[i] = (neighbors < 2 || neighbors > 3) ? 0 : 1;
+            if (neighbors == 2 || neighbors == 3)
+            {
+                grid[row][i] = ALIVE;
+            }
+            else
+            {
+                grid[row][i] = ALIVEDEAD;
+            }
         }
         else
         {
-            newGrid[i] = (neighbors == 3) ? 1 : 0;
+            if (neighbors == 3)
+            {
+                grid[row][i] = DEADALIVE;
+            }
+            else
+            {
+                grid[row][i] = DEAD;
+            }
         }
-    }
-
-#pragma omp parallel for private(i)
-    for (i = 0; i < COLS; i++)
-    {
-        cycleGrid[row][i] = newGrid[i];
     }
 }
 
@@ -72,7 +80,7 @@ double startOpenMP1DD(int grid[ROWS][COLS])
 
         updateGrid1D(testGrid);
 
-        copyGrid(testGrid, cycleGrid);
+        applyTheChanges(testGrid);
     }
 
     end_time = omp_get_wtime();

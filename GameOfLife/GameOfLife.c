@@ -7,6 +7,17 @@
 #include "OpenMP_Solution_2D.h"
 #include "GameOfLifeConfig.h"
 
+void setRandomGridState(int grid[ROWS][COLS])
+{
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            grid[i][j] = rand() % 2;
+        }
+    }
+}
+
 void printGrid(int grid[ROWS][COLS])
 {
     printf("\n");
@@ -15,19 +26,29 @@ void printGrid(int grid[ROWS][COLS])
     {
         for (int j = 0; j < COLS; j++)
         {
-            printf("%c", IS_ALIVE(grid[i][j]) ? ALIVE : DEAD);
+            printf("%c", IS_ALIVE(grid[i][j]) ? ALIVE_PRINT : DEAD_PRINT);
         }
         printf("\n");
     }
 }
 
-void copyGrid(int toGrid[ROWS][COLS],int fromGrid[ROWS][COLS])
+void applyTheChanges(int grid[ROWS][COLS])
 {
-    for (int i = 0; i < ROWS; i++)
+    int i;
+    int j;
+
+    for (i = 0; i < ROWS; i++)
     {
-        for (int j = 0; j < COLS; j++)
+        for (j = 0; j < COLS; j++)
         {
-            toGrid[i][j] = fromGrid[i][j];
+            if (grid[i][j] == DEADALIVE)
+            {
+                grid[i][j] = 1;
+            }
+            else if (grid[i][j] == ALIVEDEAD)
+            {
+                grid[i][j] = 0;
+            }
         }
     }
 }
@@ -47,7 +68,10 @@ int countNeighbors(int grid[ROWS][COLS], int row, int col)
                 neighborCol >= 0 && neighborCol < COLS &&
                 !(i == 0 && j == 0))
             {
-                count += IS_ALIVE(grid[neighborRow][neighborCol]);
+                if (grid[neighborRow][neighborCol] == ALIVE || grid[neighborRow][neighborCol] == ALIVEDEAD)
+                {
+                    count++;
+                }
             }
         }
     }
@@ -55,21 +79,12 @@ int countNeighbors(int grid[ROWS][COLS], int row, int col)
     return count;
 }
 
-void setRandomGridState(int grid[ROWS][COLS])
-{
-    for (int i = 0; i < ROWS; i++)
-    {
-        for (int j = 0; j < COLS; j++)
-        {
-            grid[i][j] = rand() % 2;
-        }
-    }
-}
+// -1 -> It is dead but will update to 1
+
+// -2 -> It is alive but will update to 0
 
 void updateGrid(int grid[ROWS][COLS])
 {
-    int newGrid[ROWS][COLS];
-
     for (int i = 0; i < ROWS; i++)
     {
         for (int j = 0; j < COLS; j++)
@@ -78,22 +93,30 @@ void updateGrid(int grid[ROWS][COLS])
 
             if (IS_ALIVE(grid[i][j]))
             {
-                newGrid[i][j] = (neighbors < 2 || neighbors > 3) ? 0 : 1;
+                if (neighbors == 2 || neighbors == 3)
+                {
+                    grid[i][j] = ALIVE;
+                }
+                else
+                {
+                    grid[i][j] = ALIVEDEAD;
+                }
             }
             else
             {
-                newGrid[i][j] = (neighbors == 3) ? 1 : 0;
+                if (neighbors == 3)
+                {
+                    grid[i][j] = DEADALIVE;
+                }
+                else
+                {
+                    grid[i][j] = DEAD;
+                }
             }
         }
     }
 
-    for (int i = 0; i < ROWS; i++)
-    {
-        for (int j = 0; j < COLS; j++)
-        {
-            grid[i][j] = newGrid[i][j];
-        }
-    }
+    applyTheChanges(grid);
 }
 
 double startGameOfLife(int grid[ROWS][COLS])

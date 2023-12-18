@@ -1,2 +1,0 @@
-D:\Facultate\GameOfLife_OpenMP\x64\Debug\GameOfLife.exe.lastcodeanalysissucceeded
-D:\Facultate\GameOfLife_OpenMP\GameOfLife\x64\Debug\NativeCodeAnalysis.read.1.tlog
